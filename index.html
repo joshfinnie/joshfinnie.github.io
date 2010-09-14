@@ -1,1 +1,44 @@
-My GitHub Page
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8" /> 
+<title>joshfinnie.github.com</title>
+<link rel="stylesheet" href="css/reset.css" /> 
+<link rel="stylesheet" href="css/layout.css" /> 
+<link rel="stylesheet" href="css/style.css" /> 
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/htlm5.js"></script>
+<![endif]--> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Vollkorn"> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Droid+Sans+Mono"> 
+<script type="text/javascript">
+  $(function(){
+    var limit = 10
+    var login = 'joshfinnie'
+    
+    $.getJSON('http://github.com/api/v1/json/'+ login + '?callback=?', function(data) {
+          var repos = $.grep(data.user.repositories, function() {
+            return !this.fork
+          })
+          
+          repos.sort(function(a, b) {
+            return b.watchers - a.watchers
+          })
+
+          $.each(repos.slice(0, limit), function() {
+            $('#repos').append('<li><a href="' + this.url + '">' + this.name + '</a></li>')
+          })
+        })        
+      })
+    </script>
+  </head>
+  <body>
+    <!-- <p>You probably want <a href="http://github.com/nvie">this</a>.</p> -->
+    <!-- <p>But here's the repos.</p> -->
+    My repo's:
+    <ul id="repos"></ul>
+  </body>
+</html>
+</head> 
+
