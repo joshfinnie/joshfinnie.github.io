@@ -116,7 +116,7 @@
       contentType: "application/json",
       dataType: 'jsonp',
       success: function(json) {
-        $.each(json.data, function(i, value){
+        $.each(json.data.slice(0,10), function(i, value){
           if(value.fork){
             var html = '<li><a href="' + value.html_url + '">&bull; ' + value.name + '</a><p><b>Forked.</b> ' + value.description + '</p></li>'
           }
