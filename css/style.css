@@ -1,36 +1,7 @@
-body{
-  font-family: 'Vollkorn', serif;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 400;
-  text-shadow: none;
-  text-decoration: none;
-  text-transform: none;
-  letter-spacing: 0.051em;
-  word-spacing: 0em;
-  line-height: 1.5em;
+.side-nav li a {
+  font-weight: bold;
 }
-h1{
-  font-size: 34px;
-}
-h2{
-  font-size: 21px;
-}
-p{
-  padding: 5px;
-}
-ul{
+
+.side-nav li p {
   margin-left: 10px;
-  list-style-type: circle;
-  padding-left: 25px;
-}
-#header{
-  text-align: center;
-  margin: 10px;
-}
-#footer{
-  text-align: center;
-}
-.code{
-  font-family: "Droid Sans Mono", arial;
 }

@@ -1,59 +1,137 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-    <head> 
-        <meta charset="UTF-8" /> 
-        <title>joshfinnie.github.com</title>
-        <link rel="stylesheet" href="css/reset.css" /> 
-        <link rel="stylesheet" href="css/layout.css" /> 
-        <link rel="stylesheet" href="css/style.css" /> 
-        <!--[if IE]>
-        <script src="http://html5shiv.googlecode.com/svn/trunk/htlm5.js"></script>
-        <![endif]--> 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Vollkorn"> 
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Droid+Sans+Mono"> 
-        <script type="text/javascript">
-            $(function(){
-                    var limit = 10
-                    var login = 'joshfinnie'
 
-                    $.getJSON('http://github.com/api/v1/json/'+ login + '?callback=?', function(data) {
-                        var repos = $.grep(data.user.repositories, function() {
-                            return !this.fork
-                            })
+<!DOCTYPE html>
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
 
-                        repos.sort(function(a, b) {
-                            return b.watchers - a.watchers
-                            })
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
 
-                        $.each(repos.slice(0, limit), function() {
-                            $('#repos').append('<li><a href="' + this.url + '">' + this.name + '</a></li>')
-                            })
-                        })        
-                    })
-</script>
-  </head>
-  <body>
-      <div id="head" class="container_12">
-          <div id="header" class="grid_12">
-              <h1>My public repos:</h1>
-          </div>
-      </div>
-        <div id="main" class="container_12">
-            <div id="mainer" class="grid_12">
-                <ul id="repos"></ul>
+  <title>Josh Finnie on Github</title>
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/foundation.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="js/vendor/custom.modernizr.js"></script>
+
+</head>
+<body>
+<div class="row">
+  <div class="large-12 columns">
+
+    <!-- Navigation -->
+
+      <nav class="top-bar">
+        <ul class="title-area">
+          <!-- Title Area -->
+          <li class="name"><h1><a href="#">Josh Finnie on Github</a></h1></li>
+        </ul>
+    </nav>
+
+    <!-- End Navigation -->
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="row">
+
+    <!-- Content -->
+
+        <div class="large-8 columns">
+          <div class="panel radius">
+
+          <div class="row">
+
+          <div class="large-12 small-12 columns">
+
+            <div class="show-for-small" align="center">
+              <h4>Contact me.</h4>
+              <a href="https://twitter.com/joshfinnie" class="small radius button expand">Twitter</a><br>
+
+              <a href="https://www.linkedin.com/in/joshfinnie" class="small radius button expand">Linked In</a>
+            </div>
+
+            <h4>Repositories</h4>
+            <p>Listed by date updated.</p>
+
+            <div id='repos'>
+              <ul class="side-nav">
+
+              </ul>
             </div>
         </div>
-      <div id="foot" class="container_12">
-          <div id="footer" class="grid_12">
-              &copy; 2010 All Rights Reserved<br />
-              Created by <a href="mailto:info@cochonfarm.com?subject=Sent%20from%20JF:GIS">Cochon Farm</a><br /> 
-              <a
-                  href="http://validator.w3.org/check?uri=http%3A%2F%2Fjfgis.com%2F">Valid HTML5</a> 
-              &amp; <a
-                  href="http://jigsaw.w3.orgcss-validator/validator?uri=jfgis.com&profile=css21&usermedium=all&warning=1">CSS</a></p> 
-          </div>
+
+        </div>
+        </div>
+        </div>
+
+        <div class="large-4 columns hide-for-small">
+
+          <h4>Contact me.</h4><hr/>
+
+          <a href="https://twitter.com/joshfinnie" class="large radius button expand">Twitter</a><br>
+
+          <a href="https://www.linkedin.com/in/joshfinnie" class="large radius button expand">Linked In</a>
+
+        </div>
+
+    <!-- End Content -->
+
       </div>
-  </body>
+    </div>
+  </div>
+
+    <!-- Footer -->
+
+  <footer class="row">
+    <div class="large-12 columns">
+      <hr>
+      <div class="row">
+        <div class="large-12 columns">
+          <p>&copy; 2013. All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <!-- Included JS Files -->
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="js/vendor/foundation.min.js"></script>
+  <script src="js/index.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
+  <script>
+    $.ajax({
+      type: 'GET',
+      url: 'https://api.github.com/users/joshfinnie/repos?sort=updated&type=public',
+      async: false,
+      jsonpCallback: 'jsonCallback',
+      contentType: "application/json",
+      dataType: 'jsonp',
+      success: function(json) {
+        $.each(json.data, function(i, value){
+          if(value.fork){
+            var html = '<li><a href="' + value.html_url + '">&bull; ' + value.name + '</a><p><b>Forked.</b> ' + value.description + '</p></li>'
+          }
+          else {
+            var html = '<li><a href="' + value.html_url + '">&bull; ' + value.name + '</a><p>' + value.description + '</p></li>'
+          }
+          $('#repos ul')
+            .append(html)
+        })
+      },
+      error: function(e) {
+         console.log(e.message);
+      }
+    });
+  </script>
+
+</body>
 </html>
-</head>
