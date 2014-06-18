@@ -12,6 +12,7 @@
 
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/foundation.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 
   <script src="js/vendor/custom.modernizr.js"></script>
@@ -115,10 +116,10 @@
       success: function(json) {
         $.each(json.data.slice(0,10), function(i, value){
           if(value.fork){
-            var html = '<li><a href="' + value.html_url + '">&bull; ' + value.name + '</a><p><b>Forked.</b> ' + value.description + '</p></li>'
+            var html = '<li><i class="fa fa-code-fork"></i><a href="' + value.html_url + '">' + value.name + '</a><p>' + value.description + '</p></li>'
           }
           else {
-            var html = '<li><a href="' + value.html_url + '">&bull; ' + value.name + '</a><p>' + value.description + '</p></li>'
+            var html = '<li><i class="fa fa-code"></i><a href="' + value.html_url + '">' + value.name + '</a><p>' + value.description + '</p></li>'
           }
           $('#repos ul')
             .append(html)
