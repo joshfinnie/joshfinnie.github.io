@@ -112,10 +112,10 @@
       success: function(json) {
         $.each(json.data.slice(0,10), function(i, value){
           if(value.fork){
-            var html = '<div><h2><i class="fa fa-code-fork"></i><a href="' + value.html_url + '">' + value.name + '</a></h2><p>' + value.description + '</p></div>'
+            var html = '<div><h3><i class="fa fa-code-fork"></i> <a href="' + value.html_url + '">' + value.name + '</a></h3><p>' + value.description + '</p></div>'
           }
           else {
-            var html = '<div><h2><i class="fa fa-code"></i><a href="' + value.html_url + '">' + value.name + '</a><h2><p>' + value.description + '</p></div>'
+            var html = '<div><h3><i class="fa fa-code"></i> <a href="' + value.html_url + '">' + value.name + '</a><h3><p>' + value.description + '</p></div>'
           }
           $('#repos')
             .append(html)
